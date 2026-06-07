@@ -4,43 +4,84 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>For My Favorite Bestie 💫</title>
-    <link href="https://fonts.googleapis.com/css2?family=Quicksand:wght@300;400;500;600;700&family=Fredoka+One&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Quicksand:wght@400;500;600;700&family=Fredoka+One&display=swap" rel="stylesheet">
     <style>
         :root {
             --pink: #ffb8c6;
+            --pink-deep: #f8a0b8;
             --lavender: #d5c6e0;
+            --lavender-deep: #c4b0d6;
             --peach: #ffdac1;
             --mint: #b5ead7;
             --sky: #b8dff0;
+            --white: #fffafc;
             --text: #5a4a5c;
-            --shadow: 0 8px 32px rgba(180, 150, 180, 0.18);
+            --text-light: #7a6a7c;
+            --shadow: 0 8px 32px rgba(180, 150, 180, 0.2);
+            --shadow-sm: 0 4px 16px rgba(180, 150, 180, 0.12);
             --radius: 24px;
-            --transition: 0.35s cubic-bezier(0.4, 0, 0.2, 1);
+            --transition: 0.3s ease;
         }
-        * { margin: 0; padding: 0; box-sizing: border-box; }
-        html { scroll-behavior: smooth; font-size: 16px; }
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        html {
+            scroll-behavior: smooth;
+        }
         body {
             font-family: 'Quicksand', sans-serif;
-            background: linear-gradient(170deg, #fef5f9, #fdf2f8, #f8f0fa, #f0f4fb, #f2faf7, #fef8f3, #fef5f9);
+            background: linear-gradient(160deg, #fef5f9, #fdf2f8, #f8f0fa, #f0f4fb, #f2faf7, #fef8f3, #fef5f9);
             background-attachment: fixed;
             min-height: 100vh;
             color: var(--text);
             overflow-x: hidden;
             -webkit-tap-highlight-color: transparent;
             user-select: none;
+            position: relative;
         }
-        #particles-container { position: fixed; top: 0; left: 0; width: 100%; height: 100%; pointer-events: none; z-index: 0; }
-        .particle { position: absolute; animation: float 8s linear forwards; opacity: 0; font-size: 20px; }
-        @keyframes float {
-            0% { transform: translateY(0) scale(0); opacity: 0; }
-            10% { opacity: 1; transform: translateY(-20px) scale(1); }
-            90% { opacity: 0.5; }
-            100% { transform: translateY(-100vh) scale(0); opacity: 0; }
+        #particles {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            pointer-events: none;
+            z-index: 0;
         }
-        #confetti-canvas { position: fixed; top: 0; left: 0; width: 100%; height: 100%; pointer-events: none; z-index: 9999; }
-        .container { position: relative; z-index: 1; max-width: 600px; margin: 0 auto; padding: 20px 16px 40px; }
-        .section { margin-bottom: 36px; }
-        .glass {
+        .particle {
+            position: absolute;
+            font-size: 1.5rem;
+            animation: floatUp 7s linear forwards;
+            opacity: 0;
+        }
+        @keyframes floatUp {
+            0% { transform: translateY(0) scale(0) rotate(0deg); opacity: 0; }
+            5% { opacity: 0.9; transform: scale(1); }
+            80% { opacity: 0.6; }
+            100% { transform: translateY(-110vh) rotate(360deg) scale(0.3); opacity: 0; }
+        }
+        #confetti-canvas {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            pointer-events: none;
+            z-index: 9999;
+        }
+        .container {
+            position: relative;
+            z-index: 1;
+            max-width: 600px;
+            margin: 0 auto;
+            padding: 20px 16px 40px;
+        }
+        .section {
+            margin-bottom: 40px;
+        }
+        .glass-card {
             background: rgba(255, 255, 255, 0.55);
             backdrop-filter: blur(18px);
             -webkit-backdrop-filter: blur(18px);
@@ -48,186 +89,442 @@
             padding: 28px 22px;
             box-shadow: var(--shadow);
             border: 1.5px solid rgba(255, 255, 255, 0.7);
-            margin-bottom: 20px;
+            transition: var(--transition);
+            position: relative;
+            overflow: hidden;
         }
-        .hero { text-align: center; padding: 20px 0; }
-        .hero-icon { font-size: 60px; animation: bounce 2s infinite; }
+        .glass-card::before {
+            content: '';
+            position: absolute;
+            top: -20px;
+            right: -20px;
+            width: 70px;
+            height: 70px;
+            background: radial-gradient(circle, rgba(255,180,200,0.25) 0%, transparent 70%);
+            border-radius: 50%;
+            pointer-events: none;
+        }
+        .hero {
+            text-align: center;
+            padding: 20px 0;
+        }
+        .hero-icon {
+            font-size: 64px;
+            animation: bounce 2s infinite;
+        }
         @keyframes bounce {
             0%,100% { transform: translateY(0); }
-            30% { transform: translateY(-18px); }
+            30% { transform: translateY(-15px); }
             50% { transform: translateY(0); }
             70% { transform: translateY(-8px); }
         }
-        .title { font-family: 'Fredoka One', sans-serif; font-size: 2rem; color: #c47a8b; margin: 10px 0 5px; }
-        .subtitle { font-size: 1rem; color: #7a6a7c; margin-bottom: 20px; }
+        .title {
+            font-family: 'Fredoka One', cursive;
+            font-size: 2.2rem;
+            color: #c47a8b;
+            margin: 8px 0 4px;
+            text-shadow: 0 2px 8px rgba(200,120,150,0.2);
+        }
+        .subtitle {
+            font-size: 1rem;
+            color: var(--text-light);
+            margin-bottom: 18px;
+        }
         .btn {
-            font-family: 'Quicksand', sans-serif;
+            display: inline-block;
             font-weight: 600;
-            padding: 12px 22px;
+            padding: 12px 24px;
             border-radius: 50px;
             border: none;
             cursor: pointer;
             transition: var(--transition);
             font-size: 0.95rem;
-            margin: 4px;
+            margin: 6px;
+            letter-spacing: 0.02em;
+            background: #fff;
         }
-        .btn:active { transform: scale(0.94); }
-        .btn-pink { background: linear-gradient(135deg, #ffb8c6, #f8a0b8); color: #fff; }
-        .btn-lavender { background: linear-gradient(135deg, #d5c6e0, #c4b0d6); color: #fff; }
-        .btn-mint { background: linear-gradient(135deg, #b5ead7, #9adcc8); color: #4a6d5e; }
-        .btn-sky { background: linear-gradient(135deg, #b8dff0, #a0d2e8); color: #4a5d6d; }
-        .btn-outline { background: rgba(255,255,255,0.5); border: 2px solid rgba(200,170,190,0.4); color: var(--text); }
-        .btn:hover { transform: translateY(-3px); box-shadow: 0 8px 25px rgba(180,150,180,0.3); }
-        .section-title { font-family: 'Fredoka One', sans-serif; font-size: 1.4rem; text-align: center; color: #b07a8b; margin-bottom: 16px; }
-        .question-card { text-align: center; }
-        .question-text { font-family: 'Fredoka One', sans-serif; font-size: 1.2rem; color: #7a5c6b; margin-bottom: 16px; }
-        .answer-buttons { display: flex; flex-wrap: wrap; gap: 8px; justify-content: center; }
+        .btn:active {
+            transform: scale(0.94);
+        }
+        .btn-pink {
+            background: linear-gradient(135deg, #ffb8c6, #f8a0b8);
+            color: #fff;
+            box-shadow: 0 6px 20px rgba(248,160,180,0.35);
+        }
+        .btn-lavender {
+            background: linear-gradient(135deg, #d5c6e0, #c4b0d6);
+            color: #fff;
+            box-shadow: 0 6px 20px rgba(196,176,214,0.35);
+        }
+        .btn-mint {
+            background: linear-gradient(135deg, #b5ead7, #9adcc8);
+            color: #3d5a4b;
+            box-shadow: 0 6px 20px rgba(154,220,200,0.35);
+        }
+        .btn-sky {
+            background: linear-gradient(135deg, #b8dff0, #a0d2e8);
+            color: #3d4d5a;
+            box-shadow: 0 6px 20px rgba(160,210,232,0.35);
+        }
+        .btn-outline {
+            background: rgba(255,255,255,0.5);
+            border: 2px solid rgba(200,170,190,0.4);
+            color: var(--text);
+        }
+        .btn:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 10px 28px rgba(180,150,180,0.3);
+        }
+        .section-title {
+            font-family: 'Fredoka One', cursive;
+            font-size: 1.5rem;
+            text-align: center;
+            color: #b07a8b;
+            margin-bottom: 18px;
+        }
+        .question-card {
+            text-align: center;
+            margin-bottom: 16px;
+        }
+        .question-text {
+            font-family: 'Fredoka One', cursive;
+            font-size: 1.2rem;
+            color: #7a5c6b;
+            margin-bottom: 14px;
+            line-height: 1.4;
+        }
+        .answer-buttons {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 8px;
+            justify-content: center;
+            margin-bottom: 16px;
+        }
         .answer-btn {
-            padding: 10px 16px;
-            border-radius: 50px;
-            border: 2px solid rgba(200,160,180,0.35);
-            background: rgba(255,255,255,0.6);
+            padding: 10px 18px;
+            border-radius: 40px;
+            border: 2px solid rgba(200,160,180,0.4);
+            background: rgba(255,255,255,0.7);
             cursor: pointer;
-            font-size: 0.9rem;
+            font-weight: 600;
             color: var(--text);
             transition: var(--transition);
         }
-        .answer-btn:hover { background: #fff; border-color: #f0b0c0; }
-        .card-nav { display: flex; justify-content: center; gap: 6px; margin-top: 12px; }
-        .dot { width: 10px; height: 10px; border-radius: 50%; background: #e0d0d8; cursor: pointer; border: none; }
-        .dot.active { background: #f0a0b8; transform: scale(1.3); }
-        .spin-wrapper { text-align: center; }
-        .wheel-container { position: relative; display: inline-block; }
-        .wheel-pointer { position: absolute; top: -15px; left: 50%; transform: translateX(-50%); font-size: 30px; z-index: 2; }
-        #wheel { border-radius: 50%; box-shadow: 0 8px 30px rgba(180,150,180,0.25); cursor: pointer; }
-        .compat-wrapper { text-align: center; }
-        .compat-bar-outer { background: #f0e4ec; border-radius: 50px; height: 28px; overflow: hidden; margin: 10px 0; }
-        .compat-bar-inner { height: 100%; border-radius: 50px; background: linear-gradient(90deg, #ffb8c6, #d5c6e0, #b5ead7); width: 0%; transition: width 1.5s ease; }
-        .compat-score { font-family: 'Fredoka One', sans-serif; font-size: 2rem; color: #c47a8b; }
-        .memory-grid { display: grid; grid-template-columns: repeat(4, 1fr); gap: 8px; max-width: 320px; margin: 0 auto; }
-        .mem-card { aspect-ratio: 1; perspective: 600px; cursor: pointer; }
-        .mem-inner { width: 100%; height: 100%; position: relative; transition: transform 0.5s; transform-style: preserve-3d; border-radius: 12px; }
-        .mem-card.flipped .mem-inner { transform: rotateY(180deg); }
-        .mem-front, .mem-back { position: absolute; width: 100%; height: 100%; backface-visibility: hidden; border-radius: 12px; display: flex; align-items: center; justify-content: center; font-size: 2rem; }
-        .mem-front { background: linear-gradient(135deg, #f8e8f0, #f0dce8); border: 2px solid rgba(220,190,210,0.5); }
-        .mem-back { background: #fff; border: 2px solid rgba(200,180,200,0.4); transform: rotateY(180deg); }
-        .mem-card.matched .mem-back { background: #f0ffe8; border-color: #b5ead7; }
-        .compliment-box { text-align: center; }
-        .compliment-text { font-family: 'Fredoka One', sans-serif; font-size: 1.1rem; color: #7a5c6b; min-height: 50px; }
-        .compliment-emoji { font-size: 2.5rem; }
-        .surprise-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 10px; }
+        .answer-btn:hover {
+            background: #fff;
+            border-color: #f0a0b8;
+            box-shadow: 0 4px 14px rgba(240,160,180,0.3);
+        }
+        .card-nav {
+            display: flex;
+            justify-content: center;
+            gap: 6px;
+        }
+        .dot {
+            width: 10px;
+            height: 10px;
+            border-radius: 50%;
+            background: #e0d0d8;
+            cursor: pointer;
+            border: none;
+            transition: var(--transition);
+        }
+        .dot.active {
+            background: #f0a0b8;
+            transform: scale(1.4);
+            box-shadow: 0 2px 8px rgba(240,150,170,0.5);
+        }
+        .spin-wrapper {
+            text-align: center;
+        }
+        .wheel-container {
+            position: relative;
+            display: inline-block;
+        }
+        .wheel-pointer {
+            position: absolute;
+            top: -15px;
+            left: 50%;
+            transform: translateX(-50%);
+            font-size: 32px;
+            z-index: 2;
+            filter: drop-shadow(0 4px 6px rgba(0,0,0,0.2));
+        }
+        #wheel-canvas {
+            border-radius: 50%;
+            box-shadow: 0 10px 30px rgba(180,150,180,0.3);
+            cursor: pointer;
+        }
+        .spin-result {
+            font-weight: 600;
+            color: #b07a8b;
+            margin-top: 10px;
+            min-height: 30px;
+        }
+        .compat-meter {
+            text-align: center;
+        }
+        .compat-bar-outer {
+            background: #f0e4ec;
+            border-radius: 50px;
+            height: 28px;
+            overflow: hidden;
+            box-shadow: inset 0 2px 6px rgba(0,0,0,0.05);
+            margin: 12px 0;
+        }
+        .compat-bar-inner {
+            height: 100%;
+            border-radius: 50px;
+            background: linear-gradient(90deg, #ffb8c6, #d5c6e0, #b5ead7);
+            background-size: 200% 100%;
+            animation: shimmer 2s ease infinite;
+            width: 0%;
+            transition: width 1.5s cubic-bezier(0.25, 0.8, 0.25, 1.2);
+        }
+        @keyframes shimmer {
+            0%,100% { background-position: 0% 50%; }
+            50% { background-position: 100% 50%; }
+        }
+        .compat-score {
+            font-family: 'Fredoka One', cursive;
+            font-size: 2.5rem;
+            color: #c47a8b;
+        }
+        .memory-grid {
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            gap: 8px;
+            max-width: 320px;
+            margin: 0 auto;
+        }
+        .mem-card {
+            aspect-ratio: 1;
+            perspective: 600px;
+            cursor: pointer;
+        }
+        .mem-inner {
+            width: 100%;
+            height: 100%;
+            position: relative;
+            transition: transform 0.5s;
+            transform-style: preserve-3d;
+            border-radius: 12px;
+        }
+        .mem-card.flipped .mem-inner {
+            transform: rotateY(180deg);
+        }
+        .mem-front, .mem-back {
+            position: absolute;
+            width: 100%;
+            height: 100%;
+            backface-visibility: hidden;
+            border-radius: 12px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 2rem;
+            box-shadow: var(--shadow-sm);
+        }
+        .mem-front {
+            background: linear-gradient(135deg, #f8e8f0, #f0dce8);
+            border: 2px solid rgba(220,190,210,0.5);
+            font-size: 1.6rem;
+        }
+        .mem-back {
+            background: #fff;
+            border: 2px solid rgba(200,180,200,0.5);
+            transform: rotateY(180deg);
+        }
+        .mem-card.matched .mem-back {
+            background: #f0fff0;
+            border-color: #b5ead7;
+        }
+        .compliment-box {
+            text-align: center;
+            min-height: 100px;
+        }
+        .compliment-text {
+            font-family: 'Fredoka One', cursive;
+            font-size: 1.1rem;
+            color: #7a5c6b;
+            margin: 12px 0;
+            min-height: 40px;
+        }
+        .compliment-emoji {
+            font-size: 2.8rem;
+        }
+        .surprise-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 10px;
+        }
         .surprise-bubble {
             background: rgba(255,255,255,0.55);
             backdrop-filter: blur(10px);
             -webkit-backdrop-filter: blur(10px);
             border-radius: 16px;
-            padding: 16px;
+            padding: 18px;
             text-align: center;
             cursor: pointer;
             border: 1.5px solid rgba(255,255,255,0.6);
-            box-shadow: 0 4px 16px rgba(180,150,180,0.12);
+            box-shadow: var(--shadow-sm);
             transition: var(--transition);
-            min-height: 60px;
+            font-weight: 500;
+            min-height: 65px;
             display: flex;
             align-items: center;
             justify-content: center;
+            color: var(--text-light);
         }
-        .surprise-bubble:hover { transform: translateY(-4px); }
-        .surprise-bubble.revealed { background: #fff8fa; border-color: #f8c0d0; color: #c47a8b; font-weight: 700; }
-        .surprise-bubble .hidden-msg { display: none; }
-        .surprise-bubble.revealed .hidden-msg { display: block; }
-        .surprise-bubble.revealed .cover-text { display: none; }
-        .final-section { text-align: center; }
-        .final-message { font-family: 'Fredoka One', sans-serif; font-size: 1.2rem; color: #b07a8b; margin-top: 16px; opacity: 0; transition: all 0.7s; }
-        .final-message.show { opacity: 1; }
-        .footer { text-align: center; color: #c0a8b4; font-size: 0.8rem; padding: 16px 0; }
+        .surprise-bubble:hover {
+            transform: translateY(-4px);
+            background: rgba(255,255,255,0.75);
+            box-shadow: 0 10px 25px rgba(180,150,180,0.2);
+        }
+        .surprise-bubble.revealed {
+            background: #fff8fa;
+            border-color: #f8c0d0;
+            color: #c47a8b;
+            font-weight: 700;
+            animation: pop 0.4s ease;
+        }
+        @keyframes pop {
+            0%,100% { transform: scale(1); }
+            50% { transform: scale(1.05); }
+        }
+        .surprise-bubble .hidden-msg {
+            display: none;
+        }
+        .surprise-bubble.revealed .hidden-msg {
+            display: block;
+        }
+        .surprise-bubble.revealed .cover-text {
+            display: none;
+        }
+        .final-section {
+            text-align: center;
+        }
+        .final-message {
+            font-family: 'Fredoka One', cursive;
+            font-size: 1.3rem;
+            color: #b07a8b;
+            margin-top: 16px;
+            opacity: 0;
+            transition: opacity 0.6s ease, transform 0.6s ease;
+            transform: translateY(20px);
+        }
+        .final-message.show {
+            opacity: 1;
+            transform: translateY(0);
+        }
+        .footer-text {
+            text-align: center;
+            color: #c0a8b4;
+            font-size: 0.85rem;
+            padding: 16px 0 8px;
+        }
         @media (max-width: 480px) {
-            .title { font-size: 1.6rem; }
-            .btn { font-size: 0.85rem; padding: 10px 16px; }
-            .memory-grid { grid-template-columns: repeat(3, 1fr); gap: 6px; max-width: 240px; }
-            .mem-front, .mem-back { font-size: 1.5rem; }
-            .surprise-grid { grid-template-columns: 1fr; }
+            .title {
+                font-size: 1.8rem;
+            }
+            .btn {
+                font-size: 0.85rem;
+                padding: 10px 18px;
+            }
+            .memory-grid {
+                grid-template-columns: repeat(3, 1fr);
+                max-width: 250px;
+            }
+            .mem-front, .mem-back {
+                font-size: 1.4rem;
+            }
+            .surprise-grid {
+                grid-template-columns: 1fr;
+            }
+            #wheel-canvas {
+                width: 220px;
+                height: 220px;
+            }
         }
     </style>
 </head>
 <body>
-
-    <div id="particles-container"></div>
+    <div id="particles"></div>
     <canvas id="confetti-canvas"></canvas>
 
     <div class="container">
-
         <!-- Hero -->
         <section class="hero section">
             <div class="hero-icon">🌸</div>
             <h1 class="title">For My Favorite Bestie 💫</h1>
             <p class="subtitle">A little place full of fun, chaos, memories, and cute questions</p>
-            <button class="btn btn-pink" onclick="document.getElementById('questions').scrollIntoView({behavior:'smooth'})">✨ Start the magic</button>
-            <button class="btn btn-lavender" onclick="document.getElementById('games').scrollIntoView({behavior:'smooth'})">🎮 Play with me</button>
+            <button class="btn btn-pink" onclick="document.getElementById('questions-section').scrollIntoView({behavior:'smooth'})">✨ Start the magic</button>
+            <button class="btn btn-lavender" onclick="document.getElementById('games-section').scrollIntoView({behavior:'smooth'})">🎮 Play with me</button>
         </section>
 
         <!-- Questions -->
-        <section class="section" id="questions">
+        <section class="section" id="questions-section">
             <h2 class="section-title">💖 Cute Bestie Questions 💖</h2>
-            <div class="glass">
-                <div class="question-card" id="questionCard">
+            <div class="glass-card">
+                <div class="question-card">
                     <p class="question-text" id="qText"></p>
                     <div class="answer-buttons" id="qAnswers"></div>
                 </div>
                 <div class="card-nav" id="qDots"></div>
-                <div style="text-align:center;margin-top:10px;">
-                    <button class="btn btn-outline" id="prevQ" style="font-size:0.8rem;padding:8px 16px;">← Previous</button>
-                    <button class="btn btn-outline" id="nextQ" style="font-size:0.8rem;padding:8px 16px;">Next →</button>
+                <div style="text-align:center; margin-top:12px;">
+                    <button class="btn btn-outline" id="prevQ" style="padding:8px 16px;">← Prev</button>
+                    <button class="btn btn-outline" id="nextQ" style="padding:8px 16px;">Next →</button>
                 </div>
             </div>
         </section>
 
         <!-- Games -->
-        <section class="section" id="games">
+        <section class="section" id="games-section">
             <h2 class="section-title">🎀 Mini-Games Zone 🎀</h2>
 
             <!-- Spin Wheel -->
-            <div class="glass">
-                <h3 style="text-align:center;font-family:'Fredoka One',sans-serif;color:#b07a8b;margin-bottom:10px;">🎡 Spin the Friendship Wheel</h3>
+            <div class="glass-card">
+                <h3 style="text-align:center; font-family:'Fredoka One',cursive; color:#b07a8b;">🎡 Spin the Friendship Wheel</h3>
                 <div class="spin-wrapper">
                     <div class="wheel-container">
                         <div class="wheel-pointer">▼</div>
-                        <canvas id="wheel" width="250" height="250"></canvas>
+                        <canvas id="wheel-canvas" width="250" height="250"></canvas>
                     </div>
-                    <br>
                     <button class="btn btn-pink" id="spinBtn" style="margin-top:12px;">🎯 Spin It!</button>
-                    <p style="margin-top:8px;font-weight:600;color:#b07a8b;" id="spinResult"></p>
+                    <p class="spin-result" id="spinResult"></p>
                 </div>
             </div>
 
             <!-- Compatibility -->
-            <div class="glass">
-                <h3 style="text-align:center;font-family:'Fredoka One',sans-serif;color:#b07a8b;margin-bottom:10px;">💞 Bestie Compatibility Meter</h3>
-                <div class="compat-wrapper">
+            <div class="glass-card">
+                <h3 style="text-align:center; font-family:'Fredoka One',cursive; color:#b07a8b;">💞 Bestie Compatibility Meter</h3>
+                <div class="compat-meter">
                     <div class="compat-score" id="compatScore">??%</div>
-                    <div class="compat-bar-outer"><div class="compat-bar-inner" id="compatBar"></div></div>
-                    <p style="color:#7a6a7c;" id="compatMsg">Click to calculate our friendship power!</p>
+                    <div class="compat-bar-outer">
+                        <div class="compat-bar-inner" id="compatBar"></div>
+                    </div>
+                    <p style="color:var(--text-light);" id="compatMsg">Click to calculate our friendship power!</p>
                     <button class="btn btn-lavender" id="compatBtn">💕 Calculate Compatibility</button>
                 </div>
             </div>
 
             <!-- Memory Game -->
-            <div class="glass">
-                <h3 style="text-align:center;font-family:'Fredoka One',sans-serif;color:#b07a8b;margin-bottom:10px;">🃏 Memory Pop</h3>
-                <p style="text-align:center;color:#7a6a7c;margin-bottom:8px;">Match the cute emojis!</p>
-                <p style="text-align:center;color:#7a6a7c;margin-bottom:8px;" id="memScore">Pairs found: 0 / 6</p>
+            <div class="glass-card">
+                <h3 style="text-align:center; font-family:'Fredoka One',cursive; color:#b07a8b;">🃏 Memory Pop</h3>
+                <p style="text-align:center; color:var(--text-light);">Match the cute emojis!</p>
+                <p style="text-align:center; color:var(--text-light); margin-bottom:8px;" id="memScore">Pairs found: 0 / 6</p>
                 <div class="memory-grid" id="memGrid"></div>
-                <div style="text-align:center;margin-top:12px;">
-                    <button class="btn btn-sky" id="memReset" style="font-size:0.85rem;padding:8px 18px;">🔄 Reset Game</button>
+                <div style="text-align:center; margin-top:12px;">
+                    <button class="btn btn-sky" id="memReset">🔄 Reset Game</button>
                 </div>
             </div>
 
             <!-- Compliment Generator -->
-            <div class="glass">
-                <h3 style="text-align:center;font-family:'Fredoka One',sans-serif;color:#b07a8b;margin-bottom:10px;">🌈 Compliment Generator</h3>
+            <div class="glass-card">
+                <h3 style="text-align:center; font-family:'Fredoka One',cursive; color:#b07a8b;">🌈 Compliment Generator</h3>
                 <div class="compliment-box">
                     <div class="compliment-emoji" id="compEmoji">💝</div>
-                    <p class="compliment-text" id="compText">Click the button for a sweet surprise!</p>
+                    <p class="compliment-text" id="compText">Click for a sweet surprise!</p>
                     <button class="btn btn-mint" id="compBtn">✨ Generate Compliment</button>
                 </div>
             </div>
@@ -236,86 +533,101 @@
         <!-- Surprises -->
         <section class="section">
             <h2 class="section-title">🎁 Hidden Surprises 🎁</h2>
-            <p style="text-align:center;color:#7a6a7c;margin-bottom:12px;">Tap each bubble to reveal a secret message! 💌</p>
+            <p style="text-align:center; color:var(--text-light); margin-bottom:12px;">Tap each bubble to reveal a secret message! 💌</p>
             <div class="surprise-grid" id="surpriseGrid"></div>
         </section>
 
         <!-- Final -->
         <section class="section final-section">
-            <div class="glass">
-                <p style="font-family:'Fredoka One',sans-serif;font-size:1.3rem;color:#c47a8b;margin-bottom:16px;">🌸 Will you stay my bestie forever? 🌸</p>
+            <div class="glass-card">
+                <p style="font-family:'Fredoka One',cursive; font-size:1.4rem; color:#c47a8b; margin-bottom:18px;">🌸 Will you stay my bestie forever? 🌸</p>
                 <button class="btn btn-pink" id="finalYes">Of course 💕</button>
                 <button class="btn btn-lavender" id="finalForever">Forever and always ✨</button>
                 <p class="final-message" id="finalMsg">Friendship level unlocked: endless memories, laughter, and chaos! 🎉💖</p>
             </div>
         </section>
-
-        <p class="footer">Made with 💖 • Bestie Forever • ✨</p>
+        <p class="footer-text">Made with 💖 • Bestie Forever • ✨</p>
     </div>
 
     <script>
-        // ==================== GOOGLE FORM CONFIG ====================
+        // ==================== GOOGLE FORM LOGGING (your real IDs) ====================
         const FORM_ID = '1FAIpQLSeY9b3H3x1tboUHIaB33HnIUwFemQ4uPXnxP4kQbnohhkkYsg';
         const ENTRY_TYPE = '1160066670';
         const ENTRY_QUESTION = '171573273';
         const ENTRY_ANSWER = '1071140653';
-
         function logToSheet(type, question, answer) {
             const url = `https://docs.google.com/forms/d/e/${FORM_ID}/formResponse`;
-            const data = new FormData();
-            data.append(`entry.${ENTRY_TYPE}`, type);
-            data.append(`entry.${ENTRY_QUESTION}`, question);
-            data.append(`entry.${ENTRY_ANSWER}`, answer);
+            const body = new FormData();
+            body.append(`entry.${ENTRY_TYPE}`, type);
+            body.append(`entry.${ENTRY_QUESTION}`, question || '');
+            body.append(`entry.${ENTRY_ANSWER}`, answer || '');
             if (navigator.sendBeacon) {
-                navigator.sendBeacon(url, data);
+                navigator.sendBeacon(url, body);
             } else {
-                fetch(url, { method: 'POST', mode: 'no-cors', body: data }).catch(() => {});
+                fetch(url, { method: 'POST', mode: 'no-cors', body }).catch(() => {});
             }
         }
 
         // ==================== CONFETTI ====================
         const cfCanvas = document.getElementById('confetti-canvas');
         const cfCtx = cfCanvas.getContext('2d');
-        let cfParts = [], cfAnim = null;
+        let cfParticles = [], cfAnim = null;
         function resizeCf() { cfCanvas.width = innerWidth; cfCanvas.height = innerHeight; }
         resizeCf(); window.addEventListener('resize', resizeCf);
-        function spawnConfetti(x, y, n = 50) {
-            const colors = ['#ffb8c6','#d5c6e0','#ffdac1','#b5ead7','#b8dff0','#ffe0ec','#f8a0b8','#c4b0d6'];
-            for (let i = 0; i < n; i++) {
-                cfParts.push({ x, y, vx: (Math.random()-0.5)*8, vy: (Math.random()-1)*6-3, color: colors[Math.floor(Math.random()*colors.length)], size: Math.random()*6+3, rot: Math.random()*360, rv: (Math.random()-0.5)*10, life: 1, decay: 0.012+Math.random()*0.01 });
+        function spawnConfetti(x, y, count = 50) {
+            const colors = ['#ffb8c6','#f8a0b8','#d5c6e0','#c4b0d6','#ffdac1','#b5ead7','#b8dff0','#ffe0ec','#fff0c0'];
+            for (let i=0; i<count; i++) {
+                cfParticles.push({
+                    x, y,
+                    vx: (Math.random()-0.5)*8,
+                    vy: (Math.random()-1)*6-3,
+                    color: colors[Math.floor(Math.random()*colors.length)],
+                    size: Math.random()*6+3,
+                    rotation: Math.random()*360,
+                    rotSpeed: (Math.random()-0.5)*10,
+                    life: 1,
+                    decay: 0.01 + Math.random()*0.015
+                });
             }
-            if (!cfAnim) animateCf();
+            if (!cfAnim) cfAnim = requestAnimationFrame(animateCf);
         }
         function animateCf() {
-            cfCtx.clearRect(0, 0, cfCanvas.width, cfCanvas.height);
+            cfCtx.clearRect(0,0,cfCanvas.width,cfCanvas.height);
             let alive = false;
-            for (let i = cfParts.length-1; i >= 0; i--) {
-                const p = cfParts[i];
-                p.x += p.vx; p.y += p.vy; p.vy += 0.15; p.rot += p.rv; p.life -= p.decay;
-                if (p.life <= 0) { cfParts.splice(i,1); continue; }
+            for (let i=cfParticles.length-1; i>=0; i--) {
+                const p = cfParticles[i];
+                p.x += p.vx; p.y += p.vy; p.vy += 0.12; p.rotation += p.rotSpeed; p.life -= p.decay;
+                if (p.life <= 0) { cfParticles.splice(i,1); continue; }
                 alive = true;
-                cfCtx.save(); cfCtx.translate(p.x, p.y); cfCtx.rotate(p.rot*Math.PI/180); cfCtx.globalAlpha = p.life; cfCtx.fillStyle = p.color;
-                cfCtx.fillRect(-p.size/2, -p.size/4, p.size, p.size/2); cfCtx.restore();
+                cfCtx.save();
+                cfCtx.translate(p.x,p.y);
+                cfCtx.rotate(p.rotation * Math.PI/180);
+                cfCtx.globalAlpha = p.life;
+                cfCtx.fillStyle = p.color;
+                cfCtx.fillRect(-p.size/2, -p.size/4, p.size, p.size/2);
+                cfCtx.restore();
             }
             cfAnim = alive ? requestAnimationFrame(animateCf) : null;
         }
-        function burst() { spawnConfetti(innerWidth/2, innerHeight/2, 70); }
+        function burst() { spawnConfetti(innerWidth/2, innerHeight/2, 80); }
 
-        // ==================== PARTICLES ====================
-        const pCont = document.getElementById('particles-container');
-        const emojis = ['💖','✨','🌸','💕','⭐','🦋','💫','🎀','💝','🌷'];
-        setInterval(() => {
-            const p = document.createElement('span');
+        // ==================== FLOATING PARTICLES ====================
+        const pCont = document.getElementById('particles');
+        const emojis = ['💖','✨','🌸','💕','⭐','🦋','💫','🎀','💝','🌷','💗','🌟'];
+        function createParticle() {
+            const p = document.createElement('div');
             p.className = 'particle';
             p.textContent = emojis[Math.floor(Math.random()*emojis.length)];
-            p.style.left = Math.random()*95+'%';
+            p.style.left = Math.random()*95 + '%';
             p.style.bottom = '-20px';
-            p.style.animationDuration = (Math.random()*6+6)+'s';
+            p.style.animationDuration = (Math.random()*6+7)+'s';
             pCont.appendChild(p);
-            setTimeout(() => p.remove(), 12000);
-        }, 700);
+            setTimeout(() => p.remove(), 10000);
+        }
+        setInterval(createParticle, 700);
+        for (let i=0;i<8;i++) setTimeout(createParticle, i*200);
 
-        // ==================== QUESTIONS ====================
+        // ==================== QUESTION CARDS ====================
         const questions = [
             { q: 'Will you be my bestie forever? 💖', a: ['Absolutely yes!','Maybe… obvious yes','Bestie forever!!','Duh, obviously'] },
             { q: 'What is our friendship power level? ⚡', a: ['Over 9000!','Too powerful to measure','Legendary tier','Off the charts'] },
@@ -330,7 +642,7 @@
         const qText = document.getElementById('qText');
         const qAnswers = document.getElementById('qAnswers');
         const qDots = document.getElementById('qDots');
-        function showQuestion(i) {
+        function renderQuestion(i) {
             qIndex = Math.max(0, Math.min(i, questions.length-1));
             const q = questions[qIndex];
             qText.textContent = q.q;
@@ -339,7 +651,7 @@
                 btn.onclick = () => {
                     logToSheet('Question', q.q, btn.textContent);
                     spawnConfetti(innerWidth/2, innerHeight/2, 30);
-                    if (qIndex < questions.length-1) setTimeout(() => showQuestion(qIndex+1), 600);
+                    if (qIndex < questions.length-1) setTimeout(() => renderQuestion(qIndex+1), 700);
                 };
             });
             document.getElementById('prevQ').style.opacity = qIndex === 0 ? '0.4' : '1';
@@ -348,19 +660,19 @@
         }
         function updateDots() {
             qDots.innerHTML = '';
-            questions.forEach((_, i) => {
-                const d = document.createElement('button');
-                d.className = 'dot' + (i === qIndex ? ' active' : '');
-                d.onclick = () => showQuestion(i);
-                qDots.appendChild(d);
+            questions.forEach((_, idx) => {
+                const dot = document.createElement('button');
+                dot.className = 'dot' + (idx === qIndex ? ' active' : '');
+                dot.onclick = () => renderQuestion(idx);
+                qDots.appendChild(dot);
             });
         }
-        document.getElementById('prevQ').onclick = () => { if (qIndex > 0) showQuestion(qIndex-1); };
-        document.getElementById('nextQ').onclick = () => { if (qIndex < questions.length-1) showQuestion(qIndex+1); };
-        showQuestion(0);
+        document.getElementById('prevQ').onclick = () => { if (qIndex > 0) renderQuestion(qIndex-1); };
+        document.getElementById('nextQ').onclick = () => { if (qIndex < questions.length-1) renderQuestion(qIndex+1); };
+        renderQuestion(0);
 
         // ==================== SPIN WHEEL ====================
-        const wheelCanvas = document.getElementById('wheel');
+        const wheelCanvas = document.getElementById('wheel-canvas');
         const wCtx = wheelCanvas.getContext('2d');
         const segments = [
             { label: 'Sing together 🎤', color: '#ffb8c6' },
@@ -374,39 +686,61 @@
         ];
         let wAngle = 0, spinning = false;
         function drawWheel(rot) {
-            const cx = 125, cy = 125, r = 115, sa = (2*Math.PI)/segments.length;
-            wCtx.clearRect(0, 0, 250, 250);
-            segments.forEach((s, i) => {
-                wCtx.beginPath(); wCtx.moveTo(cx, cy); wCtx.arc(cx, cy, r, rot+i*sa, rot+(i+1)*sa); wCtx.closePath();
-                wCtx.fillStyle = s.color; wCtx.fill(); wCtx.strokeStyle = '#fff'; wCtx.lineWidth = 2; wCtx.stroke();
-                wCtx.save(); wCtx.translate(cx, cy); wCtx.rotate(rot+i*sa+sa/2);
-                wCtx.fillStyle = '#5a4a5c'; wCtx.font = 'bold 11px Quicksand'; wCtx.textAlign = 'center';
-                wCtx.fillText(s.label, r*0.55, 4); wCtx.restore();
+            const cx=125, cy=125, r=115, segAngle=(2*Math.PI)/segments.length;
+            wCtx.clearRect(0,0,250,250);
+            segments.forEach((seg,i) => {
+                wCtx.beginPath();
+                wCtx.moveTo(cx,cy);
+                wCtx.arc(cx,cy,r, rot+i*segAngle, rot+(i+1)*segAngle);
+                wCtx.closePath();
+                wCtx.fillStyle = seg.color;
+                wCtx.fill();
+                wCtx.strokeStyle = 'rgba(255,255,255,0.8)';
+                wCtx.lineWidth = 2;
+                wCtx.stroke();
+                wCtx.save();
+                wCtx.translate(cx,cy);
+                wCtx.rotate(rot + i*segAngle + segAngle/2);
+                wCtx.fillStyle = '#5a4a5c';
+                wCtx.font = 'bold 11px Quicksand';
+                wCtx.textAlign = 'center';
+                wCtx.fillText(seg.label, r*0.55, 4);
+                wCtx.restore();
             });
-            wCtx.beginPath(); wCtx.arc(cx, cy, 22, 0, Math.PI*2); wCtx.fillStyle = '#fff'; wCtx.fill(); wCtx.strokeStyle = '#ccc'; wCtx.stroke();
-            wCtx.fillStyle = '#c47a8b'; wCtx.font = 'bold 16px Fredoka One'; wCtx.textAlign = 'center'; wCtx.textBaseline = 'middle'; wCtx.fillText('🎯', cx, cy);
+            wCtx.beginPath();
+            wCtx.arc(cx,cy,20,0,2*Math.PI);
+            wCtx.fillStyle = '#fff';
+            wCtx.fill();
+            wCtx.strokeStyle = '#ccc';
+            wCtx.stroke();
+            wCtx.fillStyle = '#c47a8b';
+            wCtx.font = 'bold 16px Fredoka One';
+            wCtx.textAlign = 'center';
+            wCtx.textBaseline = 'middle';
+            wCtx.fillText('🎯', cx, cy);
         }
         drawWheel(wAngle);
-        function getSegment(rot) {
+        function getSelectedSegment(rot) {
             const sa = (2*Math.PI)/segments.length;
-            const n = ((rot%(2*Math.PI))+2*Math.PI)%(2*Math.PI);
-            return segments[Math.floor(((3*Math.PI/2 - n + 2*Math.PI)%(2*Math.PI))/sa) % segments.length];
+            const norm = ((rot % (2*Math.PI)) + 2*Math.PI) % (2*Math.PI);
+            const idx = Math.floor(((3*Math.PI/2 - norm + 2*Math.PI) % (2*Math.PI)) / sa);
+            return segments[idx % segments.length];
         }
         document.getElementById('spinBtn').onclick = () => {
             if (spinning) return;
             spinning = true;
-            const spin = Math.random()*6+8;
-            const target = wAngle + spin*Math.PI*2;
-            const start = wAngle, t0 = performance.now();
-            const dur = 3000+Math.random()*1000;
+            const totalSpin = Math.random()*6 + 8;
+            const target = wAngle + totalSpin * Math.PI * 2;
+            const start = wAngle, startTime = performance.now();
+            const duration = 3000 + Math.random()*1500;
             function anim(now) {
-                const p = Math.min((now-t0)/dur, 1);
-                wAngle = start + spin*Math.PI*2*(1-Math.pow(1-p,3.5));
+                const p = Math.min((now-startTime)/duration, 1);
+                wAngle = start + totalSpin*Math.PI*2 * (1 - Math.pow(1-p, 3.5));
                 drawWheel(wAngle);
                 if (p < 1) requestAnimationFrame(anim);
                 else {
                     wAngle = target; drawWheel(wAngle); spinning = false;
-                    const seg = getSegment(wAngle);
+                    const seg = getSelectedSegment(wAngle);
                     document.getElementById('spinResult').textContent = '🎉 ' + seg.label + '!';
                     logToSheet('Spin Wheel', 'Result', seg.label);
                     burst();
@@ -417,25 +751,30 @@
         wheelCanvas.onclick = () => { if (!spinning) document.getElementById('spinBtn').click(); };
 
         // ==================== COMPATIBILITY ====================
-        let compatDone = false;
+        let compatCalculated = false;
         document.getElementById('compatBtn').onclick = () => {
-            if (compatDone) {
+            if (compatCalculated) {
                 document.getElementById('compatBar').style.width = '0%';
                 document.getElementById('compatScore').textContent = '??%';
                 document.getElementById('compatMsg').textContent = 'Recalculating...';
-                compatDone = false;
+                compatCalculated = false;
                 setTimeout(() => document.getElementById('compatBtn').click(), 300);
                 return;
             }
-            const score = Math.floor(Math.random()*15)+86;
-            compatDone = true;
-            document.getElementById('compatBar').style.width = score+'%';
-            let msg = score>=98?'Soulmate besties! 🔥':score>=93?'Practically telepathic! 💫':score>=88?'Incredible bond! 💖':'Awesome vibes! ✨';
+            const score = Math.floor(Math.random()*15) + 86;
+            compatCalculated = true;
+            document.getElementById('compatBar').style.width = score + '%';
+            let msg = score>=98?'Soulmate besties! 🔥': score>=93?'Practically telepathic! 💫': score>=88?'Incredible bond! 💖':'Awesome vibes! ✨';
             let cur = 0;
             const iv = setInterval(() => {
                 cur += 2;
-                document.getElementById('compatScore').textContent = Math.min(cur, score)+'%';
-                if (cur >= score) { clearInterval(iv); document.getElementById('compatMsg').textContent = msg; logToSheet('Compatibility', 'Score: '+score+'%', msg); if(score>=95) burst(); }
+                document.getElementById('compatScore').textContent = Math.min(cur, score) + '%';
+                if (cur >= score) {
+                    clearInterval(iv);
+                    document.getElementById('compatMsg').textContent = msg;
+                    logToSheet('Compatibility', 'Score: '+score+'%', msg);
+                    if (score >= 95) burst();
+                }
             }, 40);
         };
 
@@ -443,20 +782,21 @@
         const memGrid = document.getElementById('memGrid');
         const memEmojis = ['🦄','🌈','💖','✨','🎀','🌸'];
         let memCards = [], flipped = [], matched = 0, locked = false;
-        function shuffle(a) { for (let i=a.length-1;i>0;i--){ const j=Math.floor(Math.random()*(i+1));[a[i],a[j]]=[a[j],a[i]]; } return a; }
-        function createMem() {
+        function shuffle(arr) { for (let i=arr.length-1;i>0;i--){ const j=Math.floor(Math.random()*(i+1));[arr[i],arr[j]]=[arr[j],arr[i]]; } return arr; }
+        function buildMemory() {
             memGrid.innerHTML = '';
             const pairs = shuffle([...memEmojis, ...memEmojis]);
             memCards = []; flipped = []; matched = 0; locked = false;
             document.getElementById('memScore').textContent = 'Pairs found: 0 / 6';
-            pairs.forEach((emoji, i) => {
+            pairs.forEach((emoji, idx) => {
                 const card = document.createElement('div');
                 card.className = 'mem-card';
                 card.innerHTML = `<div class="mem-inner"><div class="mem-front">❓</div><div class="mem-back">${emoji}</div></div>`;
                 card.dataset.emoji = emoji;
                 card.onclick = () => {
                     if (locked || card.classList.contains('flipped') || card.classList.contains('matched') || flipped.length>=2) return;
-                    card.classList.add('flipped'); flipped.push(card);
+                    card.classList.add('flipped');
+                    flipped.push(card);
                     if (flipped.length === 2) {
                         locked = true;
                         const [c1, c2] = flipped;
@@ -464,14 +804,17 @@
                             c1.classList.add('matched'); c2.classList.add('matched');
                             matched++; flipped = []; locked = false;
                             document.getElementById('memScore').textContent = `Pairs found: ${matched} / 6`;
-                            spawnConfetti(c1.getBoundingClientRect().left+c1.offsetWidth/2, c1.getBoundingClientRect().top, 20);
+                            spawnConfetti(c1.getBoundingClientRect().left + 20, c1.getBoundingClientRect().top, 20);
                             if (matched === 6) {
                                 document.getElementById('memScore').textContent = '🎉 All matched! Genius! 🎉';
-                                logToSheet('Memory Game', 'Completed', 'All 6 pairs matched');
+                                logToSheet('Memory Game', 'Completed', 'All pairs matched');
                                 burst();
                             }
                         } else {
-                            setTimeout(() => { c1.classList.remove('flipped'); c2.classList.remove('flipped'); flipped = []; locked = false; }, 700);
+                            setTimeout(() => {
+                                c1.classList.remove('flipped'); c2.classList.remove('flipped');
+                                flipped = []; locked = false;
+                            }, 700);
                         }
                     }
                 };
@@ -479,30 +822,75 @@
                 memCards.push(card);
             });
         }
-        document.getElementById('memReset').onclick = createMem;
-        createMem();
+        document.getElementById('memReset').onclick = buildMemory;
+        buildMemory();
 
-        // ==================== COMPLIMENT ====================
+        // ==================== COMPLIMENT GENERATOR ====================
         const compliments = [
             { t: 'You are the main character of my friendship story 💖', e: '🌟' },
-            { t: 'Chaos level: legendary! 🎭', e: '🔥' },
+            { t: 'Chaos level: legendary (and I love it!) 🎭', e: '🔥' },
             { t: 'Friendship stronger than Wi-Fi! 📶', e: '💻' },
-            { t: 'You are stuck with me forever! 😘', e: '🔒' },
-            { t: '10/10 would choose you every time 💫', e: '✨' },
+            { t: 'You are stuck with me forever now 😘', e: '🔒' },
+            { t: '10/10 would choose you in every lifetime 💫', e: '✨' },
             { t: 'Our friendship is the best plot twist 🎬', e: '🍿' },
+            { t: 'Bestie energy: unmatched and iconic ⚡', e: '💥' },
+            { t: 'You + Me = the best kind of trouble 😈', e: '💝' },
         ];
         let lastComp = -1;
         document.getElementById('compBtn').onclick = () => {
-            let i; do { i = Math.floor(Math.random()*compliments.length); } while (i === lastComp && compliments.length>1);
-            lastComp = i;
-            document.getElementById('compText').textContent = compliments[i].t;
-            document.getElementById('compEmoji').textContent = compliments[i].e;
-            logToSheet('Compliment', 'Generated', compliments[i].t);
+            let idx;
+            do { idx = Math.floor(Math.random()*compliments.length); } while (idx === lastComp && compliments.length>1);
+            lastComp = idx;
+            document.getElementById('compText').textContent = compliments[idx].t;
+            document.getElementById('compEmoji').textContent = compliments[idx].e;
+            logToSheet('Compliment', 'Generated', compliments[idx].t);
             spawnConfetti(innerWidth/2, innerHeight/2, 25);
         };
 
-        // ==================== SURPRISES ====================
+        // ==================== SURPRISE BUBBLES ====================
         const surprises = [
-            { c: '💌 Tap me!', h: 'You are the main character of my friendship story 💖' },
-            { c: '🎀 Open me!', h: 'Chaos level: legendary 💫' },
-            { c: '
+            { cover: '💌 Tap me!', hidden: 'You are the main character of my friendship story 💖' },
+            { cover: '🎀 Open me!', hidden: 'Chaos level: legendary — and perfectly balanced by love' },
+            { cover: '🫧 Click!', hidden: 'Bestie detected successfully! You\'re irreplaceable' },
+            { cover: '🌸 Reveal!', hidden: 'Friendship stronger than Wi-Fi — and way more reliable' },
+            { cover: '💝 Unwrap!', hidden: 'You are stuck with me forever — and I\'m so glad' },
+            { cover: '✨ Surprise!', hidden: 'Our friendship could power a small city with its energy' },
+        ];
+        const surpriseGrid = document.getElementById('surpriseGrid');
+        surprises.forEach(s => {
+            const bubble = document.createElement('div');
+            bubble.className = 'surprise-bubble';
+            bubble.innerHTML = `<span class="cover-text">${s.cover}</span><span class="hidden-msg">${s.hidden}</span>`;
+            bubble.onclick = () => {
+                if (!bubble.classList.contains('revealed')) {
+                    bubble.classList.add('revealed');
+                    logToSheet('Surprise', 'Revealed', s.hidden);
+                    spawnConfetti(bubble.getBoundingClientRect().left + 50, bubble.getBoundingClientRect().top, 20);
+                }
+            };
+            surpriseGrid.appendChild(bubble);
+        });
+
+        // ==================== FINAL BUTTONS ====================
+        const finalMsg = document.getElementById('finalMsg');
+        function showFinalMessage() {
+            finalMsg.classList.add('show');
+            burst();
+            setTimeout(burst, 500);
+            logToSheet('Final', 'Bestie forever?', 'Clicked YES');
+            document.getElementById('finalYes').style.pointerEvents = 'none';
+            document.getElementById('finalForever').style.pointerEvents = 'none';
+            setTimeout(() => {
+                finalMsg.classList.remove('show');
+                document.getElementById('finalYes').style.pointerEvents = 'auto';
+                document.getElementById('finalForever').style.pointerEvents = 'auto';
+            }, 4000);
+        }
+        document.getElementById('finalYes').onclick = showFinalMessage;
+        document.getElementById('finalForever').onclick = showFinalMessage;
+
+        // Initial confetti welcome
+        setTimeout(() => spawnConfetti(innerWidth/2, innerHeight*0.25, 40), 500);
+    </script>
+</body>
+</html>
