@@ -1,0 +1,517 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>For My Favorite Bestie 💫</title>
+    <link href="https://fonts.googleapis.com/css2?family=Quicksand:wght@300;400;500;600;700&family=Fredoka+One&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --pink: #ffb8c6;
+            --pink-deep: #f8a0b4;
+            --lavender: #d5c6e0;
+            --lavender-deep: #c4b0d6;
+            --peach: #ffdac1;
+            --mint: #b5ead7;
+            --sky: #b8dff0;
+            --sky-deep: #a0d2e8;
+            --white: #fffafc;
+            --text: #5a4a5c;
+            --text-light: #7a6a7c;
+            --shadow: 0 8px 32px rgba(180, 150, 180, 0.18);
+            --shadow-sm: 0 4px 16px rgba(180, 150, 180, 0.12);
+            --radius: 24px;
+            --radius-sm: 16px;
+            --radius-xs: 12px;
+            --transition: 0.35s cubic-bezier(0.4, 0, 0.2, 1);
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        html {
+            scroll-behavior: smooth;
+            font-size: 16px;
+        }
+
+        body {
+            font-family: 'Quicksand', sans-serif;
+            background: linear-gradient(170deg, #fef5f9 0%, #fdf2f8 15%, #f8f0fa 30%, #f0f4fb 50%, #f2faf7 65%, #fef8f3 80%, #fef5f9 100%);
+            background-attachment: fixed;
+            min-height: 100vh;
+            color: var(--text);
+            overflow-x: hidden;
+            position: relative;
+            -webkit-tap-highlight-color: transparent;
+            user-select: none;
+        }
+
+        #particles-container {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            pointer-events: none;
+            z-index: 0;
+        }
+
+        .floating-particle {
+            position: absolute;
+            pointer-events: none;
+            animation: floatUp linear forwards;
+            opacity: 0;
+        }
+
+        @keyframes floatUp {
+            0% { transform: translateY(0) translateX(0) rotate(0deg) scale(0); opacity: 0; }
+            10% { opacity: 0.9; transform: translateY(-20px) translateX(5px) rotate(15deg) scale(1); }
+            85% { opacity: 0.6; }
+            100% { transform: translateY(-105vh) translateX(40px) rotate(360deg) scale(0.3); opacity: 0; }
+        }
+
+        @keyframes floatUpAlt {
+            0% { transform: translateY(0) translateX(0) rotate(0deg) scale(0); opacity: 0; }
+            10% { opacity: 0.85; transform: translateY(-15px) translateX(-8px) rotate(-20deg) scale(1); }
+            90% { opacity: 0.5; }
+            100% { transform: translateY(-105vh) translateX(-50px) rotate(-340deg) scale(0.2); opacity: 0; }
+        }
+
+        #confetti-canvas {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            pointer-events: none;
+            z-index: 9999;
+        }
+
+        .main-container {
+            position: relative;
+            z-index: 1;
+            max-width: 600px;
+            margin: 0 auto;
+            padding: 20px 16px 40px;
+        }
+
+        .section {
+            margin-bottom: 36px;
+            position: relative;
+        }
+
+        .glass-card {
+            background: rgba(255, 255, 255, 0.55);
+            backdrop-filter: blur(18px);
+            -webkit-backdrop-filter: blur(18px);
+            border-radius: var(--radius);
+            padding: 28px 22px;
+            box-shadow: var(--shadow);
+            border: 1.5px solid rgba(255, 255, 255, 0.7);
+            transition: var(--transition);
+            position: relative;
+            overflow: hidden;
+        }
+
+        .glass-card::before {
+            content: '';
+            position: absolute;
+            top: -30px;
+            right: -30px;
+            width: 80px;
+            height: 80px;
+            background: radial-gradient(circle, rgba(255, 182, 193, 0.3) 0%, transparent 70%);
+            border-radius: 50%;
+            pointer-events: none;
+        }
+
+        .glass-card:hover {
+            box-shadow: 0 12px 40px rgba(180, 150, 180, 0.25);
+            transform: translateY(-2px);
+        }
+
+        .hero-section {
+            text-align: center;
+            padding: 20px 0 10px;
+        }
+
+        .hero-icon {
+            font-size: 64px;
+            display: block;
+            animation: bounceGentle 2s ease-in-out infinite;
+            filter: drop-shadow(0 6px 16px rgba(255, 150, 170, 0.4));
+        }
+
+        @keyframes bounceGentle {
+            0%, 100% { transform: translateY(0); }
+            30% { transform: translateY(-18px); }
+            50% { transform: translateY(0); }
+            70% { transform: translateY(-8px); }
+        }
+
+        .hero-title {
+            font-family: 'Fredoka One', 'Quicksand', sans-serif;
+            font-size: 2.2rem;
+            color: #c47a8b;
+            margin: 10px 0 6px;
+            letter-spacing: -0.02em;
+            text-shadow: 0 2px 8px rgba(200, 120, 150, 0.2);
+            line-height: 1.2;
+        }
+
+        .hero-subtitle {
+            font-size: 1.05rem;
+            color: var(--text-light);
+            font-weight: 500;
+            margin-bottom: 20px;
+            line-height: 1.5;
+        }
+
+        .hero-buttons {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 10px;
+            justify-content: center;
+            margin-top: 8px;
+        }
+
+        .btn {
+            font-family: 'Quicksand', sans-serif;
+            font-weight: 600;
+            font-size: 0.95rem;
+            padding: 12px 22px;
+            border-radius: 50px;
+            border: none;
+            cursor: pointer;
+            transition: var(--transition);
+            letter-spacing: 0.01em;
+            position: relative;
+            overflow: hidden;
+            white-space: nowrap;
+        }
+
+        .btn:active { transform: scale(0.94); transition: 0.12s ease; }
+
+        .btn-pink { background: linear-gradient(135deg, #ffb8c6, #f8a0b8); color: #fff; box-shadow: 0 6px 20px rgba(248, 160, 180, 0.35); }
+        .btn-pink:hover { box-shadow: 0 8px 28px rgba(248, 160, 180, 0.5); transform: translateY(-3px); }
+        .btn-lavender { background: linear-gradient(135deg, #d5c6e0, #c4b0d6); color: #fff; box-shadow: 0 6px 20px rgba(196, 176, 214, 0.35); }
+        .btn-lavender:hover { box-shadow: 0 8px 28px rgba(196, 176, 214, 0.5); transform: translateY(-3px); }
+        .btn-mint { background: linear-gradient(135deg, #b5ead7, #9adcc8); color: #4a6d5e; box-shadow: 0 6px 20px rgba(154, 220, 200, 0.35); }
+        .btn-mint:hover { box-shadow: 0 8px 28px rgba(154, 220, 200, 0.5); transform: translateY(-3px); }
+        .btn-sky { background: linear-gradient(135deg, #b8dff0, #a0d2e8); color: #4a5d6d; box-shadow: 0 6px 20px rgba(160, 210, 232, 0.35); }
+        .btn-sky:hover { box-shadow: 0 8px 28px rgba(160, 210, 232, 0.5); transform: translateY(-3px); }
+        .btn-outline { background: rgba(255, 255, 255, 0.5); color: var(--text); border: 2px solid rgba(200, 170, 190, 0.4); backdrop-filter: blur(8px); }
+        .btn-outline:hover { background: rgba(255, 255, 255, 0.7); border-color: rgba(200, 150, 170, 0.6); }
+
+        .section-title {
+            font-family: 'Fredoka One', 'Quicksand', sans-serif;
+            font-size: 1.5rem;
+            text-align: center;
+            color: #b07a8b;
+            margin-bottom: 18px;
+            letter-spacing: -0.01em;
+        }
+
+        .question-card-container {
+            position: relative;
+            min-height: 280px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .question-card {
+            background: rgba(255, 255, 255, 0.6);
+            backdrop-filter: blur(16px);
+            -webkit-backdrop-filter: blur(16px);
+            border-radius: var(--radius);
+            padding: 26px 20px;
+            box-shadow: var(--shadow);
+            border: 1.5px solid rgba(255, 255, 255, 0.7);
+            text-align: center;
+            width: 100%;
+            transition: all 0.5s cubic-bezier(0.4, 0, 0.2, 1);
+            position: absolute;
+            top: 0;
+            left: 0;
+        }
+
+        .question-card.hidden-left { opacity: 0; transform: translateX(-60px) scale(0.9); pointer-events: none; }
+        .question-card.hidden-right { opacity: 0; transform: translateX(60px) scale(0.9); pointer-events: none; }
+        .question-card.active { opacity: 1; transform: translateX(0) scale(1); pointer-events: all; position: relative; }
+
+        .question-text {
+            font-family: 'Fredoka One', 'Quicksand', sans-serif;
+            font-size: 1.25rem;
+            color: #7a5c6b;
+            margin-bottom: 16px;
+            line-height: 1.4;
+        }
+
+        .answer-buttons {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 8px;
+            justify-content: center;
+        }
+
+        .answer-btn {
+            font-family: 'Quicksand', sans-serif;
+            font-weight: 600;
+            font-size: 0.9rem;
+            padding: 10px 18px;
+            border-radius: 50px;
+            border: 2px solid rgba(200, 160, 180, 0.35);
+            background: rgba(255, 255, 255, 0.6);
+            cursor: pointer;
+            transition: var(--transition);
+            color: var(--text);
+        }
+        .answer-btn:hover { background: #fff; border-color: #f0b0c0; box-shadow: 0 4px 16px rgba(240, 170, 190, 0.3); transform: translateY(-2px); }
+        .answer-btn:active { transform: scale(0.94); background: #fff0f3; }
+
+        .reaction-pop {
+            position: absolute;
+            font-size: 2rem;
+            pointer-events: none;
+            animation: popReaction 1s ease-out forwards;
+            z-index: 10;
+        }
+
+        @keyframes popReaction {
+            0% { transform: scale(0) rotate(-20deg); opacity: 1; }
+            60% { transform: scale(1.5) rotate(5deg); opacity: 1; }
+            100% { transform: scale(1.8) rotate(0deg) translateY(-40px); opacity: 0; }
+        }
+
+        .card-nav { display: flex; justify-content: center; gap: 6px; margin-top: 14px; }
+        .card-dot { width: 10px; height: 10px; border-radius: 50%; background: #e0d0d8; transition: var(--transition); cursor: pointer; }
+        .card-dot.active { background: #f0a0b8; transform: scale(1.3); box-shadow: 0 2px 8px rgba(240, 150, 170, 0.4); }
+        .card-dot.done { background: #c4b0d6; }
+
+        .spin-wheel-wrapper { display: flex; flex-direction: column; align-items: center; gap: 16px; }
+        .spin-wheel-container { position: relative; width: 280px; height: 280px; }
+        #spin-wheel-canvas { width: 280px; height: 280px; border-radius: 50%; box-shadow: 0 8px 32px rgba(180, 150, 180, 0.25); cursor: pointer; transition: box-shadow 0.3s; }
+        #spin-wheel-canvas:hover { box-shadow: 0 12px 40px rgba(180, 150, 180, 0.4); }
+        .wheel-pointer { position: absolute; top: -18px; left: 50%; transform: translateX(-50%); font-size: 36px; z-index: 2; filter: drop-shadow(0 3px 6px rgba(0, 0, 0, 0.2)); pointer-events: none; }
+        .spin-result { font-family: 'Fredoka One', 'Quicksand', sans-serif; font-size: 1.1rem; color: #b07a8b; text-align: center; min-height: 40px; transition: var(--transition); }
+
+        .compat-meter-wrapper { text-align: center; }
+        .compat-bar-outer { background: #f0e4ec; border-radius: 50px; height: 28px; overflow: hidden; box-shadow: inset 0 3px 8px rgba(0, 0, 0, 0.06); margin: 12px 0; }
+        .compat-bar-inner { height: 100%; border-radius: 50px; background: linear-gradient(90deg, #ffb8c6, #f8a0b8, #e890a8, #d5c6e0, #b5ead7); background-size: 200% 100%; animation: shimmerBar 2s ease-in-out infinite; width: 0%; transition: width 1.8s cubic-bezier(0.25, 0.8, 0.25, 1.2); }
+        @keyframes shimmerBar { 0%, 100% { background-position: 0% 50%; } 50% { background-position: 100% 50%; } }
+        .compat-score { font-family: 'Fredoka One', 'Quicksand', sans-serif; font-size: 2.5rem; color: #c47a8b; }
+        .compat-msg { font-weight: 600; color: var(--text-light); margin-top: 4px; }
+
+        .memory-grid { display: grid; grid-template-columns: repeat(4, 1fr); gap: 10px; max-width: 340px; margin: 0 auto; }
+        .memory-card { aspect-ratio: 1; perspective: 600px; cursor: pointer; }
+        .memory-card-inner { width: 100%; height: 100%; position: relative; transition: transform 0.5s cubic-bezier(0.4, 0, 0.2, 1); transform-style: preserve-3d; border-radius: var(--radius-xs); }
+        .memory-card.flipped .memory-card-inner { transform: rotateY(180deg); }
+        .memory-card-front, .memory-card-back { position: absolute; width: 100%; height: 100%; backface-visibility: hidden; border-radius: var(--radius-xs); display: flex; align-items: center; justify-content: center; font-size: 2rem; box-shadow: var(--shadow-sm); }
+        .memory-card-front { background: linear-gradient(135deg, #f8e8f0, #f0dce8); border: 2px solid rgba(220, 190, 210, 0.5); cursor: pointer; font-size: 1.5rem; }
+        .memory-card-front:hover { background: linear-gradient(135deg, #fce8f2, #f5dcec); box-shadow: 0 6px 20px rgba(200, 160, 180, 0.3); }
+        .memory-card-back { background: #fff; border: 2px solid rgba(200, 180, 200, 0.4); transform: rotateY(180deg); font-size: 2.2rem; }
+        .memory-card.matched .memory-card-back { background: #f0ffe8; border-color: #b5ead7; animation: matchPulse 0.6s ease; }
+        @keyframes matchPulse { 0%, 100% { transform: rotateY(180deg) scale(1); } 50% { transform: rotateY(180deg) scale(1.15); } }
+        .memory-score { text-align: center; font-weight: 600; color: var(--text-light); margin-bottom: 8px; font-size: 0.95rem; }
+
+        .compliment-box { text-align: center; min-height: 100px; display: flex; flex-direction: column; align-items: center; justify-content: center; gap: 12px; }
+        .compliment-text { font-family: 'Fredoka One', 'Quicksand', sans-serif; font-size: 1.2rem; color: #7a5c6b; transition: var(--transition); min-height: 50px; display: flex; align-items: center; }
+        .compliment-emoji { font-size: 2.5rem; animation: bounceGentle 1.5s ease-in-out infinite; }
+
+        .surprise-grid { display: grid; grid-template-columns: repeat(2, 1fr); gap: 12px; }
+        .surprise-bubble { background: rgba(255, 255, 255, 0.55); backdrop-filter: blur(10px); -webkit-backdrop-filter: blur(10px); border-radius: var(--radius-sm); padding: 16px; text-align: center; cursor: pointer; border: 1.5px solid rgba(255, 255, 255, 0.6); box-shadow: var(--shadow-sm); transition: var(--transition); font-weight: 500; color: var(--text-light); min-height: 70px; display: flex; align-items: center; justify-content: center; position: relative; overflow: hidden; }
+        .surprise-bubble:hover { transform: translateY(-4px); box-shadow: 0 10px 28px rgba(180, 150, 180, 0.25); background: rgba(255, 255, 255, 0.75); }
+        .surprise-bubble.revealed { background: #fff8fa; border-color: #f8c0d0; color: #c47a8b; font-weight: 700; animation: revealPulse 0.5s ease; }
+        @keyframes revealPulse { 0%, 100% { transform: scale(1); } 50% { transform: scale(1.06); } }
+        .surprise-bubble .hidden-msg { display: none; }
+        .surprise-bubble.revealed .hidden-msg { display: block; }
+        .surprise-bubble.revealed .cover-text { display: none; }
+
+        .final-section { text-align: center; }
+        .final-card { background: rgba(255, 255, 255, 0.6); backdrop-filter: blur(18px); -webkit-backdrop-filter: blur(18px); border-radius: var(--radius); padding: 32px 20px; box-shadow: var(--shadow); border: 2px solid rgba(255, 220, 235, 0.7); }
+        .final-question { font-family: 'Fredoka One', 'Quicksand', sans-serif; font-size: 1.5rem; color: #c47a8b; margin-bottom: 18px; }
+        .final-buttons { display: flex; flex-wrap: wrap; gap: 10px; justify-content: center; }
+        .final-message { font-family: 'Fredoka One', 'Quicksand', sans-serif; font-size: 1.3rem; color: #b07a8b; margin-top: 16px; opacity: 0; transform: translateY(20px); transition: all 0.7s cubic-bezier(0.4, 0, 0.2, 1); }
+        .final-message.show { opacity: 1; transform: translateY(0); }
+
+        .tiny-footer { text-align: center; color: #c0a8b4; font-size: 0.8rem; padding: 16px 0 8px; font-weight: 500; }
+
+        @media (max-width: 480px) {
+            .hero-title { font-size: 1.7rem; }
+            .hero-subtitle { font-size: 0.9rem; }
+            .btn { font-size: 0.85rem; padding: 10px 16px; }
+            .section-title { font-size: 1.25rem; }
+            .question-text { font-size: 1.1rem; }
+            .memory-grid { grid-template-columns: repeat(3, 1fr); gap: 6px; max-width: 260px; }
+            .memory-card-front, .memory-card-back { font-size: 1.5rem; }
+            .memory-card-back { font-size: 1.8rem; }
+            .surprise-grid { grid-template-columns: 1fr 1fr; gap: 8px; }
+            .spin-wheel-container { width: 220px; height: 220px; }
+            #spin-wheel-canvas { width: 220px; height: 220px; }
+            .glass-card { padding: 20px 14px; }
+            .final-question { font-size: 1.2rem; }
+            .compat-score { font-size: 2rem; }
+        }
+
+        @media (max-width: 360px) {
+            .hero-title { font-size: 1.4rem; }
+            .btn { font-size: 0.78rem; padding: 8px 14px; }
+            .memory-grid { grid-template-columns: repeat(3, 1fr); gap: 5px; max-width: 220px; }
+            .memory-card-front, .memory-card-back { font-size: 1.2rem; }
+            .memory-card-back { font-size: 1.4rem; }
+            .surprise-grid { grid-template-columns: 1fr; gap: 8px; }
+        }
+    </style>
+</head>
+<body>
+
+    <div id="particles-container"></div>
+    <canvas id="confetti-canvas"></canvas>
+
+    <div class="main-container">
+
+        <section class="section hero-section" id="hero">
+            <span class="hero-icon">🌸</span>
+            <h1 class="hero-title">For My Favorite Bestie 💫</h1>
+            <p class="hero-subtitle">A little place full of fun, chaos, memories, and cute questions</p>
+            <div class="hero-buttons">
+                <button class="btn btn-pink" onclick="scrollToSection('questions-section')">✨ Start the magic</button>
+                <button class="btn btn-lavender" onclick="scrollToSection('games-section')">🎮 Play with me</button>
+                <button class="btn btn-mint" onclick="scrollToSection('questions-section')">💬 Answer cute questions</button>
+            </div>
+        </section>
+
+        <section class="section" id="questions-section">
+            <h2 class="section-title">💖 Cute Bestie Questions 💖</h2>
+            <div class="glass-card">
+                <div class="question-card-container" id="question-card-container"></div>
+                <div class="card-nav" id="card-nav-dots"></div>
+                <div style="text-align:center;margin-top:10px;">
+                    <button class="btn btn-outline btn-sm" id="prev-question-btn" style="font-size:0.8rem;padding:8px 16px;">← Previous</button>
+                    <button class="btn btn-outline btn-sm" id="next-question-btn" style="font-size:0.8rem;padding:8px 16px;">Next →</button>
+                </div>
+            </div>
+        </section>
+
+        <section class="section" id="games-section">
+            <h2 class="section-title">🎀 Mini-Games Zone 🎀</h2>
+
+            <div class="glass-card" style="margin-bottom:20px;">
+                <h3 style="text-align:center;font-family:'Fredoka One','Quicksand',sans-serif;color:#b07a8b;margin-bottom:12px;">🎡 Spin the Friendship Wheel</h3>
+                <div class="spin-wheel-wrapper">
+                    <div class="spin-wheel-container">
+                        <div class="wheel-pointer">▼</div>
+                        <canvas id="spin-wheel-canvas" width="280" height="280"></canvas>
+                    </div>
+                    <button class="btn btn-pink" id="spin-btn">🎯 Spin It!</button>
+                    <div class="spin-result" id="spin-result"></div>
+                </div>
+            </div>
+
+            <div class="glass-card" style="margin-bottom:20px;">
+                <h3 style="text-align:center;font-family:'Fredoka One','Quicksand',sans-serif;color:#b07a8b;margin-bottom:12px;">💞 Bestie Compatibility Meter</h3>
+                <div class="compat-meter-wrapper">
+                    <div class="compat-score" id="compat-score">??%</div>
+                    <div class="compat-bar-outer">
+                        <div class="compat-bar-inner" id="compat-bar"></div>
+                    </div>
+                    <p class="compat-msg" id="compat-msg">Click to calculate our friendship power!</p>
+                    <button class="btn btn-lavender" id="compat-btn" style="margin-top:10px;">💕 Calculate Compatibility</button>
+                </div>
+            </div>
+
+            <div class="glass-card" style="margin-bottom:20px;">
+                <h3 style="text-align:center;font-family:'Fredoka One','Quicksand',sans-serif;color:#b07a8b;margin-bottom:12px;">🃏 Memory Pop</h3>
+                <p style="text-align:center;color:var(--text-light);font-size:0.9rem;margin-bottom:8px;">Match the cute emojis!</p>
+                <div class="memory-score" id="memory-score">Pairs found: 0 / 6</div>
+                <div class="memory-grid" id="memory-grid"></div>
+                <div style="text-align:center;margin-top:12px;">
+                    <button class="btn btn-sky btn-sm" id="memory-reset-btn" style="font-size:0.85rem;padding:8px 18px;">🔄 Reset Game</button>
+                </div>
+            </div>
+
+            <div class="glass-card">
+                <h3 style="text-align:center;font-family:'Fredoka One','Quicksand',sans-serif;color:#b07a8b;margin-bottom:12px;">🌈 Compliment Generator</h3>
+                <div class="compliment-box">
+                    <span class="compliment-emoji" id="compliment-emoji">💝</span>
+                    <p class="compliment-text" id="compliment-text">Click the button for a sweet surprise!</p>
+                    <button class="btn btn-mint" id="compliment-btn">✨ Generate Compliment</button>
+                </div>
+            </div>
+        </section>
+
+        <section class="section" id="surprises-section">
+            <h2 class="section-title">🎁 Hidden Surprises 🎁</h2>
+            <p style="text-align:center;color:var(--text-light);font-size:0.9rem;margin-bottom:12px;">Tap each bubble to reveal a secret message! 💌</p>
+            <div class="surprise-grid" id="surprise-grid"></div>
+        </section>
+
+        <section class="section final-section" id="final-section">
+            <div class="final-card">
+                <p class="final-question">🌸 Will you stay my bestie forever? 🌸</p>
+                <div class="final-buttons">
+                    <button class="btn btn-pink" id="final-yes-btn">Of course 💕</button>
+                    <button class="btn btn-lavender" id="final-forever-btn">Forever and always ✨</button>
+                </div>
+                <p class="final-message" id="final-message">Friendship level unlocked: endless memories, laughter, and chaos! 🎉💖</p>
+            </div>
+        </section>
+
+        <p class="tiny-footer">Made with 💖 • Bestie Forever • ✨</p>
+    </div>
+
+    <script>
+        // ==================== GOOGLE FORM CONFIGURATION ====================
+        // Replace these with YOUR values from the pre-filled link
+        const FORM_ID = '1FAIpQLSeY9b3H3x1tboUHIaB33HnIUwFemQ4uPXnxP4kQbnohhkkYsg'; // e.g., '1FAIpQLSdGz8F4kL9nMz2Rj5Q7bWv6xY8cA0tP3uH1w'
+        const ENTRY_IDS = {
+            type: '1160066670',    // e.g., '123456'
+            question: '171573273', // e.g., '789012'
+            answer: '1071140653'    // e.g., '345678'
+        };
+
+        // Function to submit to Google Form silently
+        function logToSheet(type, question, answer) {
+            if (FORM_ID === 'YOUR_FORM_ID') return; // Not configured yet
+            const formUrl = `https://docs.google.com/forms/d/e/${FORM_ID}/formResponse`;
+            const formData = new FormData();
+            formData.append(`entry.${ENTRY_IDS.type}`, type || '');
+            formData.append(`entry.${ENTRY_IDS.question}`, question || '');
+            formData.append(`entry.${ENTRY_IDS.answer}`, answer || '');
+            
+            // Use navigator.sendBeacon for reliable background submission
+            if (navigator.sendBeacon) {
+                navigator.sendBeacon(formUrl, formData);
+            } else {
+                // Fallback for older browsers
+                fetch(formUrl, {
+                    method: 'POST',
+                    mode: 'no-cors',
+                    body: formData
+                }).catch(() => {});
+            }
+        }
+
+        // ==================== CONFETTI SYSTEM ====================
+        const confettiCanvas = document.getElementById('confetti-canvas');
+        const confettiCtx = confettiCanvas.getContext('2d');
+        let confettiParticles = [];
+        let confettiAnimId = null;
+
+        function resizeConfettiCanvas() {
+            confettiCanvas.width = window.innerWidth;
+            confettiCanvas.height = window.innerHeight;
+        }
+        resizeConfettiCanvas();
+        window.addEventListener('resize', resizeConfettiCanvas);
+
+        function spawnConfetti(x, y, count = 60) {
+            const colors = ['#ffb8c6', '#f8a0b8', '#d5c6e0', '#c4b0d6', '#ffdac1', '#b5ead7', '#b8dff0', '#ffe0ec', '#fff0c0', '#e8d0f0', '#ffc8d6', '#a8e6cf', '#ffaaa5', '#ffd3b6', '#dcedc1'];
+            for (let i = 0; i < count; i++) {
+                confettiParticles.push({
+                    x: x, y: y,
+                    vx: (Math.random() - 0.5) *
